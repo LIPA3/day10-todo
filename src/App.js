@@ -2,43 +2,70 @@ import {createContext, useContext, useReducer} from "react";
 import "./App.css"
 
 export const initState = [
-  {id: 1, text: "the first todo", done: false},
-  {id: 2, text: "the second todo", done: true},
+    {id: 1, text: "the first todo", done: false},
+    {id: 2, text: "the second todo", done: true},
 ];
 export const TodoContext = createContext()
 
 function TodoItem(props) {
-  return <div className={"todo-item"}>
-    <span className={props.todo.done?"todo-done":""}>
+    const {state, dispatch} = useContext(TodoContext);
+
+    function makeAsDone() {
+        dispatch({
+            type: 'TUGGLE_TODO',
+            payload: {id: props.todo.id}
+        });
+    }
+
+    return <div className={"todo-item"}>
+    <span className={props.todo.done ? "todo-done" : ""}
+          onClick={makeAsDone}>
       {props.todo.text}
     </span>
-  </div>;
+    </div>;
 }
 
 function TodoGroup() {
-  const {state,dispatch}=useContext(TodoContext);
-  return <div>
-    {
-      state.map((item,index) => {
-        return <TodoItem todo={item} key={index} index={index}></TodoItem>
-      })
-    }
-  </div>;
+    const {state, dispatch} = useContext(TodoContext);
+    return <div>
+        {
+            state.map((item, index) => {
+                return <TodoItem todo={item} key={index} index={index}></TodoItem>
+            })
+        }
+    </div>;
 }
 
 export function todoReducer(state, action) {
-  return state
+    switch (action.type) {
+        case "TUGGLE_TODO":
+            const newState = [...state];
+            console.log("1111",state,action)
+            const id = action.payload.id;
+            return newState.map((value) => {
+                if (value.id === id) {
+                    return {
+                        id,
+                        text: value.text,
+                        done: !value.done,
+                    }
+                }
+                return value;
+            })
+        default:
+            return state;
+    }
 }
 
 function App() {
-  const [state, dispatch] = useReducer(todoReducer, initState);
-  return (
-      <div>
-        <TodoContext.Provider value={{state, dispatch}}>
-          <TodoGroup/>
-        </TodoContext.Provider>
-      </div>
-  );
+    const [state, dispatch] = useReducer(todoReducer, initState);
+    return (
+        <div>
+            <TodoContext.Provider value={{state, dispatch}}>
+                <TodoGroup/>
+            </TodoContext.Provider>
+        </div>
+    );
 }
 
 export default App;
