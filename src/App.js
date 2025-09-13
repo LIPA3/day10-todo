@@ -80,9 +80,9 @@ function TodoItemGenerator() {
         }
     }
     return <div>
-        {state.length === 0 && <div>Add the things you need to do today...</div>}
-        <input type="text" value={input} onChange={e => setInput(e.target.value)} />
-        <button onClick={addTodo}>add</button>
+        {state.length === 0 && <div className="todo-placeholder">Add the things you need to do today...</div>}
+        <input className={"todo-input"} type="text" value={input} onChange={e => setInput(e.target.value)} />
+        <button onClick={addTodo} className={"todo-button"}>add</button>
     </div>;
 }
 function App() {
