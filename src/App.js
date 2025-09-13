@@ -80,7 +80,7 @@ function TodoItemGenerator() {
         }
     }
     return <div>
-        <div>Add the things you need to do today...</div>
+        {state.length === 0 && <div>Add the things you need to do today...</div>}
         <input type="text" value={input} onChange={e => setInput(e.target.value)} />
         <button onClick={addTodo}>add</button>
     </div>;
