@@ -4,7 +4,11 @@ export default function ErrorPage(){
     return <div>
         {JSON.stringify(error)}
         {error.status === 404
-         ? <div>Page not found<span>try</span></div>
+         ? <div>Page not found
+            <div>
+            <a href="/">try</a>
+            </div>
+            </div>
          : <div>{JSON.stringify(error)}</div>}
     </div>
 }

@@ -15,8 +15,7 @@ const headerStyle = {
 const tabItems = [
   { key: "/todoList", label: "Todo List" },
   { key: "/donelist", label: "Done List" },
-  { key: "/about", label: "About Us" },
-  { key: "/TodoDetail", label: "Todo Detail" }
+  { key: "/about", label: "About Us" }
 ];
 
 function DefaultLayout() {

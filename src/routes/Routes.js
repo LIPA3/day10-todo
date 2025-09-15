@@ -26,7 +26,11 @@ const route=createBrowserRouter([
             {
                 path:'/about',
                 element:<AboutPage></AboutPage>
-            }
+            },
+            // {
+            //     path:'/error',
+            //     element:<ErrorPage></ErrorPage>
+            // }
         ]
     }
 ])
