@@ -8,9 +8,20 @@ function TodoItem(props) {
     const { state, dispatch } = useContext(TodoContext);
 
     function makeAsDone() {
-        dispatch({
-            type: 'TUGGLE_TODO',
-            payload: { id: props.todo.id }
+        api.put(`/todos/${props.todo.id}`, {
+            ...props.todo,
+            done: !props.todo.done
+        }).then((response) => response.data)
+        .then((updatedTodo) => {
+            dispatch({
+                type: 'TOGGLE_TODO',
+                payload: { id: updatedTodo.id }
+            });
+            api.get("/todos")
+            .then((response) => response.data)
+            .then(todos => {
+                dispatch({type: "LOAD_TODOS", payload: todos});
+            });
         });
     }
     function deleteTodo(id) {

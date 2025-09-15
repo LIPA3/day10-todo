@@ -1,18 +1,12 @@
 export function todoReducer(state, action) {
     switch (action.type) {
         case "TUGGLE_TODO":
-            const newState = [...state];
-            const id = action.payload.id;
-            return newState.map((value) => {
-                if (value.id === id) {
-                    return {
-                        id,
-                        text: value.text,
-                        done: !value.done,
-                    }
+            return state.map(item => {
+                if (item.id === action.payload.id) {
+                    return { ...item, done: !item.done };
                 }
-                return value;
-            })
+                return item;
+            });
         case "DELETE_TODO":
             return state.filter(item => item.id !== action.payload.id);
         case "ADD_TODO":

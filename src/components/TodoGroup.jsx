@@ -10,8 +10,6 @@ function TodoGroup() {
             state.map((item, index) => {
                 return <div className={"todo-group"} key={item.id}>
                     <TodoItem todo={item} index={index}></TodoItem>
-                    {/* <button className={"to-delete"} onClick={() => deleteTodo(item.id)}>X</button> */}
-                    
                 </div>
             })
             
