@@ -1,4 +1,4 @@
-import { use, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import "./App.css"
 import { todoReducer } from "./reduces/TodoReducer";
 import { TodoContext } from "./contexts/TodoContext";
