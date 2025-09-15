@@ -1,11 +1,17 @@
 import { useContext, useState } from "react";
 import { TodoContext } from "../contexts/TodoContext";
+import api from "../api/mockApi";
 function TodoItemGenerator() {
     const { dispatch, state } = useContext(TodoContext);
     const [input, setInput] = useState("");
     function addTodo() {
         const text = input.trim();
         if (text) {
+            api.post("/todos", { text, done: false })
+                .then((response) => response.data)
+                .then((todo) => {
+                    dispatch({ type: "ADD_TODO", payload: todo });
+                });
             const maxId = state.length > 0 ? Math.max(...state.map(item => item.id)) : 0;
             dispatch({
                 type: "ADD_TODO",
