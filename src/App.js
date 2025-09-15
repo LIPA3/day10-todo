@@ -15,11 +15,16 @@ const route=createBrowserRouter([
         children:[
             {
                 path:'/',
-                element:<TodoList></TodoList>
+                element:<HomePage></HomePage>
             }
         ]
     }
 ])
+function HomePage(){
+    return <div>
+        <TodoList></TodoList>
+    </div>
+}
 function ErrorPage(){
     const error=useRouteError();
     return <div>
