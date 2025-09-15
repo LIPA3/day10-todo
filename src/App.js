@@ -4,9 +4,10 @@ import { todoReducer } from "./reduces/TodoReducer";
 import { TodoContext } from "./contexts/TodoContext";
 import { RouterProvider } from "react-router";
 import route from "./routes/Routes";
-import api from "./api/mockApi";
+import { useTodoService } from "./useTodoService";
 function App() {
     const [state, dispatch] = useReducer(todoReducer, []);
+    const { loadTodos } = useTodoService();
     useEffect(() => {
         loadTodos()
             .then(todos => {
@@ -21,8 +22,5 @@ function App() {
         </div>
     );
 }
-function loadTodos() {
-    return api.get("/todos")
-        .then((response) => response.data);
-}
+
 export default App;

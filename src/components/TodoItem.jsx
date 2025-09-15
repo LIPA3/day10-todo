@@ -2,13 +2,13 @@ import { useContext } from "react";
 import { TodoContext } from "../contexts/TodoContext";
 import { useNavigate } from "react-router";
 import api from "../api/mockApi";
-
+import { useTodoService } from "../useTodoService";
 
 function TodoItem(props) {
     const { state, dispatch } = useContext(TodoContext);
-
+    const { updateStatus, onDelete } = useTodoService();
     function makeAsDone() {
-        updateStatus()
+        updateStatus(props.todo)
         .then((updatedTodo) => {
             dispatch({
                 type: 'TOGGLE_TODO',
@@ -21,16 +21,9 @@ function TodoItem(props) {
             });
         });
     }
-    
-    function updateStatus() {
-        return api.put(`/todos/${props.todo.id}`, {
-            ...props.todo,
-            done: !props.todo.done
-        }).then((response) => response.data);
-    }
 
     function deleteTodo(id) {
-        api.delete(`/todos/${id}`)
+        onDelete(id)
             .then(() => {
                 dispatch({
                     type: 'DELETE_TODO',
@@ -53,5 +46,7 @@ function TodoItem(props) {
                 }
             </div>
         </div>;
+
+    
 }
 export default TodoItem
