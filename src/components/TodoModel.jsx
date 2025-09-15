@@ -5,7 +5,7 @@ import { TodoContext } from "../contexts/TodoContext";
 export default function TodoModel({ todo, isOpen, onSave, onCancel }) {
     const [editText, setEditText] = useState(todo?.text || '');
     const { state, dispatch } = useContext(TodoContext);
-    
+    const { TextArea } = Input;
     if (!todo) {
         return null;
     }
@@ -31,10 +31,11 @@ export default function TodoModel({ todo, isOpen, onSave, onCancel }) {
             okText="Save"
             cancelText="Cancel"
         >
-            <Input
+            <TextArea
                 value={editText}
                 onChange={(e) => setEditText(e.target.value)}
                 placeholder="Enter todo text"
+                rows={4}
             />
         </Modal>
     </div>
