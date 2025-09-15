@@ -3,7 +3,7 @@ export function todoReducer(state, action) {
         case "TUGGLE_TODO":
             return state.map(item => {
                 if (item.id === action.payload.id) {
-                    return { ...item, done: !item.done };
+                    return action.payload;
                 }
                 return item;
             });

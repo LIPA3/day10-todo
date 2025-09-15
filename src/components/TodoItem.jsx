@@ -8,14 +8,11 @@ function TodoItem(props) {
     const { state, dispatch } = useContext(TodoContext);
 
     function makeAsDone() {
-        api.put(`/todos/${props.todo.id}`, {
-            ...props.todo,
-            done: !props.todo.done
-        }).then((response) => response.data)
+        updateStatus()
         .then((updatedTodo) => {
             dispatch({
                 type: 'TOGGLE_TODO',
-                payload: { id: updatedTodo.id }
+                payload: { updatedTodo }
             });
             api.get("/todos")
             .then((response) => response.data)
@@ -24,6 +21,14 @@ function TodoItem(props) {
             });
         });
     }
+    
+    function updateStatus() {
+        return api.put(`/todos/${props.todo.id}`, {
+            ...props.todo,
+            done: !props.todo.done
+        }).then((response) => response.data);
+    }
+
     function deleteTodo(id) {
         api.delete(`/todos/${id}`)
             .then(() => {
