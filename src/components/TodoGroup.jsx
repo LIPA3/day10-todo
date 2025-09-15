@@ -4,14 +4,12 @@ import { TodoContext } from "../contexts/TodoContext";
 
 function TodoGroup() {
     const { state, dispatch } = useContext(TodoContext);
-
     function deleteTodo(id) {
         dispatch({
             type: 'DELETE_TODO',
             payload: { id }
         });
     }
-
     return (<div>
         {
             state.map((item, index) => {

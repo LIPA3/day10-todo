@@ -6,7 +6,6 @@ function TodoItemGenerator() {
     function addTodo() {
         const text = input.trim();
         if (text) {
-            // 生成唯一id
             const maxId = state.length > 0 ? Math.max(...state.map(item => item.id)) : 0;
             dispatch({
                 type: "ADD_TODO",
