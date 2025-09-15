@@ -12,7 +12,7 @@ const route=createBrowserRouter([
         errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
-                path:'/home',
+                path:'/todoList',
                 element:<HomePage></HomePage>
             },
             {

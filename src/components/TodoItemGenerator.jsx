@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { TodoContext } from "../contexts/TodoContext";
 import { useTodoService } from "../useTodoService";
+import { Button} from 'antd';
 function TodoItemGenerator() {
     const { dispatch, state } = useContext(TodoContext);
     const [input, setInput] = useState("");
@@ -15,10 +16,10 @@ function TodoItemGenerator() {
             setInput("");
         }
     }
-    return <div>
+    return <div className={"todo-input"}>
         {state.length === 0 && <div className="todo-placeholder">Add the things you need to do today...</div>}
-        <input className={"todo-input"} type="text" value={input} onChange={e => setInput(e.target.value)} />
-        <button onClick={addTodo} className={"todo-button"}>add</button>
+        <input type="text" value={input} onChange={e => setInput(e.target.value)} />
+        <Button type="primary" onClick={addTodo} className={"todo-button"}>add</Button>
     </div>;
 
 }

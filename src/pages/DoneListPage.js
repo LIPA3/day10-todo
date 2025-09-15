@@ -6,7 +6,7 @@ export default function DoneListPage() {
     const { state } = useContext(TodoContext);
     const doneTodos = state.filter(item => item.done);
     return <div>
-        <h2>Done List Page</h2>
+        <h2 className={"title"}>Done List Page</h2>
         {doneTodos.length === 0 ? (
             <div>No completed todos.</div>
         ) : (
