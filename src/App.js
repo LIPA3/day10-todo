@@ -14,7 +14,6 @@ function App() {
     const [state, dispatch] = useReducer(todoReducer, initState);
     return (
         <div className="App">
-            <h2 className={"title"}>Todo List</h2>
             <TodoContext.Provider value={{state, dispatch}}>
                <RouterProvider router={route}></RouterProvider>
             </TodoContext.Provider>
