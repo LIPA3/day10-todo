@@ -4,11 +4,8 @@ import {todoReducer} from "./reduces/TodoReducer";
 import {TodoContext} from "./contexts/TodoContext";
 import { RouterProvider} from "react-router";
 import route from "./routes/Routes";
+import axios from "axios";
 
-export const initState = [
-    {id: 1, text: "the first todo", done: false},
-    {id: 2, text: "the second todo", done: true},
-];
 const api = axios.create({
     baseURL: "https://68c7acbf5d8d9f5147328947.mockapi.io/",
     headers:{
@@ -17,13 +14,12 @@ const api = axios.create({
     timeout:10000
 });
 function App() {
-    const [state, dispatch] = useReducer(todoReducer, initState);
+    const [state, dispatch] = useReducer(todoReducer, []);
     useEffect(() => {
-        api.get("/todos").then((response) => {
-            const todos = response.data;
-            dispatch({ type: "SET_TODOS", payload: todos });
-        }).catch((error) => {
-            console.error("Error fetching todos:", error);
+        api.get("/todos")
+        .then((response) => response.data)
+        .then(todos => {
+            dispatch({type: "LOAD_TODOS", payload: todos});
         });
     }, []);
     return (
