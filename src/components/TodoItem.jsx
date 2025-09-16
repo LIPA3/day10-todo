@@ -10,8 +10,8 @@ import { useState } from "react";
 function TodoItem(props) {
     const { state, dispatch } = useContext(TodoContext);
     const { updateStatus, onDelete } = useTodoService();
-const [isModalOpen, setIsModalOpen] = useState(false);
-    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     function makeAsDone() {
         updateStatus(props.todo)
             .then((updatedTodo) => {
@@ -39,11 +39,11 @@ const [isModalOpen, setIsModalOpen] = useState(false);
     function handleEdit() {
         setIsModalOpen(true);
     }
-    
+
     function handleCloseModal() {
         setIsModalOpen(false);
     }
-    
+
     const navigate = useNavigate();
     return <div className={"todo-item"}>
         <List size="large"
@@ -53,19 +53,19 @@ const [isModalOpen, setIsModalOpen] = useState(false);
             className={props.todo.done ? "todo-done" : ""}
             onClick={makeAsDone}>
         </List>
-            <div className="todo-actions">
+        <div className="todo-actions">
             {props.showDetailButton !== false && (
                 <Button onClick={() => navigate(`/todos/${props.todo.id}`)}>detail</Button>
             )}
             <Button icon={<EditOutlined />} onClick={handleEdit}>edit</Button>
             <Button type="primary" danger className="to-delete" onClick={() => deleteTodo(props.todo.id)}>X</Button>
         </div>
-        
-        <TodoModel 
-            todo={props.todo} 
-            isOpen={isModalOpen} 
-            onSave={handleCloseModal} 
-            onCancel={handleCloseModal} 
+
+        <TodoModel
+            todo={props.todo}
+            isOpen={isModalOpen}
+            onSave={handleCloseModal}
+            onCancel={handleCloseModal}
         />
     </div>;
 

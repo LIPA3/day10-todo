@@ -4,7 +4,6 @@ import { TodoContext } from "../contexts/TodoContext";
 
 function TodoGroup() {
     const { state, dispatch } = useContext(TodoContext);
-    
     return (<div>
         {
             state.map((item, index) => {
